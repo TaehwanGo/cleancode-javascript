@@ -41,7 +41,34 @@ function isAdult(age: number) {
 
 - 포함된 양 끝을 의미
 - ~ 부터 ~ 까지
+- 양 끝점이 존재하나 그 안에서 연속성이나 규칙이 보장이 되지 않음
 
 ## 4-4. prefix - suffix
 
+- prefix : 접두사 - 앞쪽에 붙이는 단어
+- suffix : 접미사 - 뒤쪽에 붙이는 단어
+- 팀에서 네이밍 같은 규칙을 정하면 일관성을 가질 수 있어서 좋다
+
 ## 4-5. 매개변수의 순서가 경계다
+
+- 매개변수에 두개를 받을 때 그 순서가 처음과 끝을 의미하는 경우
+
+```js
+genRandomNumber(1, 50); // genRandomNumber가 뭔지 몰라도 1~50 사이의 숫자를 랜덤하게 생성한다는 것을 알 수 있음
+```
+
+- 매개변수의 순서가 경계다
+- rest parameter를 고려
+- arguments가 많을 땐 객체로 만드는 것을 고려해라
+- 래핑하는 함수
+
+```js
+function someFunc(arg1, arg2, arg3, arg4) {
+  // ...
+}
+
+// arg3, 4는 잘 사용안한다면 래핑하는 함수를 사용할 수도 있음
+function getFunc(arg1, arg2) {
+  someFunc(arg1, arg2);
+}
+```
