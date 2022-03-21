@@ -1,0 +1,11 @@
+/* CSS에서 shorthand properties(=attribute) 예시 */
+.before {
+  background-color: #000000;
+  background-image: url(image/bg.gif);
+  background-repeat: no-repeat;
+  background-position: left top;
+}
+
+.after {
+  background: #000000 url(image/bg.gif) no-repeat left top;
+}
