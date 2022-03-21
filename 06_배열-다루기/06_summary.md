@@ -74,3 +74,7 @@ function getWonPrice(priceList: string[]) {
 ## 6-8. map vs forEach
 
 ## 6-9. continue vs break
+
+- continue나 break는 배열 고차함수에서 사용 불가
+- 어쩔 수 없을 땐 for문을 쓰기도 함
+- Array.prototype.every, some, find 를 사용할 수도 있음
