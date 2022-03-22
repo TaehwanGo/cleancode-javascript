@@ -160,8 +160,67 @@ Object.isFrozen(STATUS.OPTIONS); // false
 
 ## 7-7. hasOwnProperty
 
+```js
+const person = {
+  name: "tony",
+};
+
+person.hasOwnProperty("name");
+
+var foo = {
+  hasOwnProperty: function () {
+    return "hasOwnProperty";
+  },
+  bar: "string",
+};
+
+console.log(foo.hasOwnProperty("bar"));
+
+console.log(Object.prototype.hasOwnProperty.call(foo, "bar"));
+```
+
+- hasOwnProperty를 객체의 메서드로 바로 사용할 경우 중간에 다른 hasOwnProperty가 있다면 그것이 호출되기 때문에
+  - Object.prototype.hasOwnProperty.call(foo, 'bar')와 같이 바인딩을 해서 사용하는 것을 추천
+  - 유틸함수로 만들어도 좋음
+
+```js
+function hasOwnProp(targetObj, targetProp) {
+  return Object.prototype.hasOwnProperty.call(targetObj, targetProp);
+}
+```
+
+- 유틸함수로 만든 경우
+
 ## 7-8. 직접 접근 지양하기
+
+```js
+const model = {
+  isLogin: false,
+  isValidToken: false,
+};
+
+function setLogin(bool: boolean) {
+  model.isLogin = bool;
+}
+
+function setValidToken(bool: boolean) {
+  model.isValidToken = bool;
+}
+
+// 직접 접근 지양하기
+function login() {
+  setLogin(true);
+  setValidToken(true);
+}
+```
+
+- 예측 가능한 코드를 작성해서 동작이 예측 가능한 앱을 만드는 것이 좋다
+- Object에서도 getter, setter를 사용할 수 있다
 
 ## 7-9. Optional Chaining
 
+- 미개봉
+
 ## 7-10. Extends & Mixin
+
+- 미개봉
