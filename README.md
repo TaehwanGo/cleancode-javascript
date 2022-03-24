@@ -31,7 +31,7 @@
 <details>
 <summary>기타</summary>
 
-- vscode extension : Quakka.js
+- vscode extension : Quokka.js
   - console.log 등 결과값 미리 표시
 
 </details>

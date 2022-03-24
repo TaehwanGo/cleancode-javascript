@@ -161,6 +161,21 @@ void function func1() {};
 
 ## 8-7. 화살표 함수
 
+- 화살표 함수
+  - this에 undefined가 바인딩 됨
+  - call, apply, bind 같은 this 바인딩 메서드를 사용할 수 없음
+  - arguments parameter를 사용할 수 없음
+    - rest parameter를 사용하는게 더 낫다
+  - 생성자 함수로 사용될 수 없음
+    - 클래스 쓰면 그만이야~
+- 클래스의 메서드는 화살표함수 대신 일반함수를 쓰는게 더 낫다
+
+  - 화살표함수는 생성자에서 초기화 됨
+  - 클래스안에서 화살표 함수를 쓰면 상속받은 자식 클래스에서 overriding을 할 수 없다
+
+- 화살표함수는 yield 키워드와 같이 사용할 수 없음
+- 그래도 그 외 함수용도론 사용하는 것은 좋다
+
 ## 8-8. Callback function
 
 ## 8-9. 순수 함수
