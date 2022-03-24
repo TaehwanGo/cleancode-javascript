@@ -54,11 +54,110 @@ const instance = new Func(); // this : instance
 
 ## 8-3. 복잡한 인자 관리하기
 
+- 함수에 몇개의 인자를 넘기는게 적당한 것일까?
+  - 매개변수의 순서가 의미가 있다면 3개, 4개도 괜찮지만 아니라면 많은 경우 객체로 넘기는게 좋다
+
+```js
+// 정말 중요한 것은 명시적으로 앞으로 빼도 됨
+function createCar(name, { type, color, brand }) {
+  return { name, type, color, brand };
+}
+```
+
+```js
+function createCar(name, { type, color, brand }) {
+  if (!name) {
+    throw new Error("name is required"); // typescript에선 필요없지만 JS에선 필요
+  }
+  return { name, type, color, brand };
+}
+```
+
 ## 8-4. Default Value
+
+```js
+function createCarousel(option) {
+  options = options || {};
+  var margin = options.margin || 0;
+  var center = options.center || false;
+  var navElement = options.navElement || "div";
+  return {
+    margin,
+    center,
+    navElement,
+  };
+}
+
+function createCarousel({
+  margin = 0,
+  center = false,
+  navElement = "div",
+} = {}) {
+  return {
+    margin,
+    center,
+    navElement,
+  };
+}
+```
+
+```js
+// 필수값을 넘기지 않으면 에러던지기 - Typescript에선 필요없음
+const required = (argName) => {
+  throw new Error("required is " + argName);
+};
+
+function createCarousel({
+  margin = required("margin"), // margin을 넘기지 않으면 에러를 던짐
+  center = false,
+  navElement = "div",
+} = {}) {
+  return {
+    margin,
+    center,
+    navElement,
+  };
+}
+```
 
 ## 8-5. Rest Parameters
 
+- arguments 대신 ...num 같이 Rest Parameter를 사용하자
+  - spread operator와 똑같이 생겼지만 다른 것이다
+
+```js
+function sumTotal(...args) {
+  return args.reduce((acc, cur) => acc + cur);
+}
+
+// 다른 매개변수와도 조합 가능 - parameter 중에서 가장 마지막에 있어야 함(그 뒤에 것은 무시 됨)
+function sumTotal(initValue, bonusValue, ...args) {
+  return args.reduce((acc, cur) => acc + cur);
+}
+```
+
 ## 8-6. void & return
+
+- void : 함수에 반환이 없는 것
+
+```js
+function handleClick() {
+  if (condition) {
+    // return setState(false); // bad
+    setState(false);
+    return; // 명확히 나눠주는 것이 좋다
+  }
+
+  // some code...
+}
+
+function showAlert(message) {
+  alert(message);
+}
+
+// void 를 붙일 수도 있음 - 호출 불가능한 함수가 됨
+void function func1() {};
+```
 
 ## 8-7. 화살표 함수
 
