@@ -178,9 +178,85 @@ void function func1() {};
 
 ## 8-8. Callback function
 
+- 콜백 함수 : 함수의 실행권을 다른 함수에 위임 하는 함수
+
 ## 8-9. 순수 함수
 
+- 자바스크립트는 동적인 언어
+- Redux : 자바스크립트 앱을 위한 예측 가능한 상태 컨테이너
+
+  - 일관적으로 동작
+  - 테스트를 하기 쉬움
+  - 디버깅이 쉬움
+  - Reducer
+    - 순수(pure)함수를 사용해야 한다
+      - 부작용(side effect)을 발생시키지 않는 함수
+
+- 순수함수가 아니게 만드는 조건들
+  - https://redux.js.org/tutorials/fundamentals/part-3-state-actions-reducers#rules-of-reducers
+  - Logging a value to the console
+  - Saving a file
+  - Setting An async timer
+  - Making an AJAX HTTP request
+  - Modifying some state that exists outside of a function, or mutating arguments to a function
+  - Generating random numbers or unique random IDs (such as `Math.random()` or `Date.now()`)
+
+```js
+// 순수함수가 아닌 함수
+let num1 = 10;
+let num2 = 20;
+function impureSum1() {
+  return num1 + num2;
+}
+num1 = 123; // 누군가 조작하면 함수의 결과 값이 예측이 안 됨
+impureSum1();
+```
+
+```js
+// 순수 함수
+function changeObj(obj) {
+  return { ...obj, one: 100 };
+}
+```
+
+- 자바스크립트 객체를 argument로 전달하고 함수안에서 parameter 객체를 조작하면 원본에도 영향을 준다
+  - 함수에서 객체를 조작할 때 복사 후 조작해서 원본에 영향을 주지 않도록 하자
+
 ## 8-10. Closure
+
+```js
+function add(num1) {
+  return function (num2) {
+    return function (calculateFn) {
+      return calculateFn(num1, num2);
+    };
+  };
+}
+
+function sum(num1, num2) {
+  return num1 + num2;
+}
+
+const addOne = add(1);
+const addTwo = addOne(2); // closure 성질로 인해 addOne에서 입력한 1을 기억
+const sumAdd = addTwo(sum); // closure 성질로 인해 addOne, addTwo에서 입력한 1, 2를 기억한 것을 콜백함수 sum에 의해 계산 됨 => 3
+console.log(sumAdd); // 3
+```
+
+```js
+const arr = [1, 2, 3, "a", "b", "c"];
+
+function isTypeOf(type) {
+  return function (value) {
+    return typeof value === type;
+  };
+}
+
+const isNumber = isTypeOf("number");
+
+arr.filter(isNumber);
+console.log(arr.filter(isTypeOf("number")));
+```
 
 ## 8-11. 고차 함수
 
