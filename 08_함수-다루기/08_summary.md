@@ -258,6 +258,37 @@ arr.filter(isNumber);
 console.log(arr.filter(isTypeOf("number")));
 ```
 
+```js
+// endpoint 별로 fetcher를 나눠 놓은 것
+function fetcher(endpoint) {
+  return function (url, options) {
+    return fetch(endpoint + url, options).then((res) => {
+      if (res.ok) {
+        return res.json();
+      } else {
+        throw new Error(res.error);
+      }
+    }).catch((err) => console.error(err));
+  }
+}
+
+const naverApi = fetcher('http://naver.com');
+naverApi('/webtoon').then((res) => res);
+```
+
+```js
+// closure의 다른 예 - debounce, throttle
+someElement.addEventListener(
+  'click',
+  debounce(handleClick, 500)
+)
+
+someElement.addEventListener(
+  'click',
+  throttle(handleClick, 500)
+)
+```
+
 ## 8-11. 고차 함수
 
 ## 8-12. Currying
